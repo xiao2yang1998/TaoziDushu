@@ -1,4 +1,4 @@
-
+文件目录结构
 ---controller: MVC中的C，主要存放视图函数
 ---common: MVC中的M，主要存放实体类文件，映射数据库表
 ---templates: MVC中的V，主要存放html文件
