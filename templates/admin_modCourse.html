@@ -1,0 +1,107 @@
+{% extends "adminBase.html" %}
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+    <head>
+        {% block head %}
+        <meta charset="utf-8" />
+        <title>课程管理-查看课程</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="https://i.loli.net/2019/03/03/5c7bddd728765.png">
+        <!-- App css -->
+        <link href="{{ url_for('static', filename='assets/css/app.css') }}" rel="stylesheet" type="text/css" />
+        {% endblock %}
+    </head>
+
+    <body>
+        {% block navbar %}
+        {{ super() }}
+        {% endblock %}
+        {% block content %}
+        <div class="wrapper">
+            <div class="container-fluid">
+
+                <!-- Page title box -->
+                <div class="page-title-box">
+                    <h4 class="page-title">查看课程</h4>
+                </div>
+                <!-- End page title box -->
+                <div class="card">
+                <form  method="post" accept-charset="utf-8" action={{ url_for('admin_page.add_course')}}>
+
+
+                        <div class="table">
+                        <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                        <tr>
+                            <td  width ="100px" align="center">套课名称</td>
+                            <td><input class="counts" type="text" id="scourse_title" name="scourse_title" value="{{ scourse.scourse_title }}"></td>
+                        </tr>
+                        <tr>
+                            <td  width ="100px" align="center">主题</td>
+                            <td>{{ scourse.scourse_theme }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td  width ="100px" align="center">阶段</td>
+                            <td>{{ scourse.scourse_stage }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td  width ="100px" align="center">介绍</td>
+                            <td width ="400px"><input class="counts" type="text" id="scourse_intro" name="scourse_intro" size="50" value="{{ scourse.scourse_intro }}"></td>
+                        </tr>
+                        <tr>
+                            <td  width ="100px" align="center">学分</td>
+                            <td><input class="counts" type="text" id="scourse_credit" name="scourse_credit" value="{{ scourse.scourse_credit }}"></td>
+
+                        </tr>
+                        <tr>
+                            <td  width ="100px" align="center">价格</td>
+                            <td><input class="counts" type="text" id="scourse_price" name="scourse_price" value="{{ scourse.scourse_price }}"></td>
+                        </tr>
+                        {% for j in range(num) %}
+                            {% set i=j+1 %}
+                        <tr>
+                            <td  width ="100px" align="center">单课{{ i }}</td>
+                            <td>
+                                <select id="pcourse{{ i }}" name="pcourse{{ i }}">
+                                    {% for p in pcourse %}
+                                        {% if p.pcourse_id == re[j] %}
+                                        <option selected="selected" value ="{{ p.pcourse_id }}">{{ p.pcourse_id }}{{ p.pcourse_title }}</option>
+                                        {% else %}
+                                            <option value ="{{ p.pcourse_id }}">{{ p.pcourse_id }}{{ p.pcourse_title }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                         <td  width ="100px" align="center"></td>
+                        {% if able==1 %}
+                            <td class="secondary" width ="400px" align="center" >尚未加入班级学习计划，可以<a class="upload" type="submit" >修改</a></td>
+                        {% else %}
+                             <td> 已加入班级学习计划，不可修改</td>
+                        {% endif %}
+                        </tr>
+                        </tbody>
+                        </form>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+        <!-- /Right-bar -->
+        <script>
+
+        {% endblock %}
+
+
+
+
+    </body>
+
+</html>

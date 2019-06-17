@@ -1,0 +1,82 @@
+{% extends "adminBase.html" %}
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+    <head>
+        {% block head %}
+        <meta charset="utf-8" />
+        <title>班级管理-添加班级</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="https://i.loli.net/2019/03/03/5c7bddd728765.png">
+        <!-- App css -->
+        <link href="{{ url_for('static', filename='assets/css/app.css') }}" rel="stylesheet" type="text/css" />
+        {% endblock %}
+    </head>
+
+    <body>
+        {% block navbar %}
+        {{ super() }}
+        {% endblock %}
+        {% block content %}
+        <div class="wrapper">
+            <div class="container-fluid">
+
+                <!-- Page title box -->
+                <div class="page-title-box">
+                    <h4 class="page-title">添加班级</h4>
+                </div>
+                <!-- End page title box -->
+                <div class="card">
+                    <form  method="post" accept-charset="utf-8" action={{ url_for('admin_page.add_class')}}>
+
+                        <div class="table">
+                        <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                        <tr>
+                            <td  width ="100px" align="center">教师</td>
+
+                            <td><select id="teacher_id" name="teacher_id">
+                                    {% for p in teacher %}
+                                  <option value ="{{ p[0] }}">{{ p[0] }}{{ p[2] }}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td  width ="100px" align="center">课程</td>
+                            <td><select id="scourse_id" name="scourse_id">
+                                    {% for s in course %}
+                                  <option value ="{{ s.scourse_id}}">{{ s.scourse_id}}{{ s.scourse_title }}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td  width ="100px" align="center">开始日期</td>
+                            <td><input name="start_time" id="start_time" type="date" value="2014-01-13"/></td>
+                        </tr>
+                        <tr>
+                            <td  width ="100px" align="center">结束日期</td>
+                            <td><input  name="end_time" id="end_time" type="date" value="2014-01-13"/></td>
+                        </tr>
+                        <tr>
+                            <td  width ="100px" align="center"></td>
+                            <td class="secondary" width ="400px" align="center" ><button class="check" type="submit" >添加班级</button></td>
+                        </tr>
+                        </tbody>
+                        </form>
+                        </table>
+                    </div>
+
+                    
+                </div>
+                
+                </div>
+            </div>
+        <!-- /Right-bar -->
+        {% endblock %}
+
+    </body>
+</html>

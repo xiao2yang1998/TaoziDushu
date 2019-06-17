@@ -1,0 +1,173 @@
+{% extends "adminBase.html" %}
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+    <head>
+        {% block head %}
+        <meta charset="utf-8" />
+        <title>课程管理-修改单课</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="https://i.loli.net/2019/03/03/5c7bddd728765.png">
+        <!-- App css -->
+        <link href="{{ url_for('static', filename='assets/css/app.css') }}" rel="stylesheet" type="text/css" />
+        {% endblock %}
+    </head>
+
+    <body>
+        {% block navbar %}
+        {{ super() }}
+        {% endblock %}
+        {% block content %}
+        <div class="wrapper">
+            <div class="container-fluid">
+
+                <!-- Page title box -->
+                <div class="page-title-box">
+                    <h4 class="page-title">修改单课</h4>
+                </div>
+                <!-- End page title box -->
+                <div class="card">
+
+                    <form  method="post" enctype="multipart/form-data" accept-charset="utf-8" action={{ url_for('admin_page.mod_pcourse',pcourse_id =pcourse_info.pcourse_title )}} >
+
+                        <div class="table">
+                        <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                        <tr>
+                            <td  width ="100px" align="center">单课id</td>
+                            <td><input readonly=true class="counts" type="text" id="pcourse_title" name="pcourse_id" value="{{ pcourse_info.pcourse_id }}"></td>
+                        </tr>
+                        <tr>
+                            <td  width ="100px" align="center">单课名称</td>
+                            <td><input class="counts" type="text" id="pcourse_title" name="pcourse_title" value="{{ pcourse_info.pcourse_title }}"></td>
+
+                        </tr>
+                        <tr>
+                            <td  width ="100px" align="center">单课介绍</td>
+                            <td width ="400px"><input class="counts" type="text" id="pcourse_intro" name="pcourse_intro" size="50" value="{{ pcourse_info.pcourse_intro }}" ></td>
+
+                        </tr>
+                        <tr>
+                            <td  width ="100px" align="center">上传封面</td>
+                            <td>
+                                <img src="{{ url_for('static', filename = 'img/%s'%pcourse_info.pcourse_imgurl ) }}" height="100">
+                                <input name="files"  type="file" />
+                            </td>
+                        </tr>
+                        {% if num==0 %}
+                            {% for i in range(1,4) %}
+                            <tr>
+                                <td  width ="100px" align="center">题目{{ i }}</td>
+                                <td>
+                                    <select id="flag{{ i }}" name="flag{{ i }}" onchange="myfunction({{ i }})">
+                                      <option value ="0" selected="selected">客观</option>
+                                      <option value ="1">主观</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td  width ="100px" align="center">题干{{ i }}</td>
+                                <td width ="400px"><input class="counts" type="text" id="pro_stem" name="pro_stem{{ i }}" size="50" >
+                                </td>
+                            </tr>
+                            <tr>
+                                <td  width ="100px" align="center"></td>
+                                <td>
+                                    <span id="for_sub{{ i }}">选项<input class="counts" type="text" id="choice" name="choice{{ i }}" >
+                                        答案
+                                        <select id="ans{{ i }}" name="ans{{ i }}" >
+                                          <option value ="A" selected="selected">A</option>
+                                          <option value ="B">B</option>
+                                            <option value ="C">C</option>
+                                            <option value ="D">D
+                                            </option>
+                                        </select>
+                                    </span>
+
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% endif %}
+                        {% for j in range(0,num) %}
+                            {% set i=j+1 %}
+                        <tr>
+                            <td  width ="100px" align="center">题目{{ i }}</td>
+                            <td>
+                                <select id="flag{{ i }}" name="flag{{ i }}" onload="myfunction({{ i }})" onchange="myfunction({{ i }})" >
+                                    {% if problems[j].flag == 0 %}
+                                  <option value ="0" selected="selected">客观</option>
+                                  <option value ="1">主观</option>
+                                    {% else %}
+                                    <option value ="0" >客观</option>
+                                    <option value ="1" selected="selected">主观</option>
+                                    {% endif %}
+                                </select>
+                            </td>
+                        </tr>
+                            <tr>
+                            <td  width ="100px" align="center">ID</td>
+                                <td><input readonly=true class="counts" type="text" id="pcourse_title" name="pro_id{{ i }}" value="{{ problems[j].pro_id }}"></td>
+
+                        </tr>
+                        <tr>
+                            <td  width ="100px" align="center" >题干{{ i }}</td>
+                            <td width ="400px"><input class="counts" type="text" id="pro_stem" name="pro_stem{{ i }}" size="50" value="{{ problems[j].pro_stem}}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td  width ="100px" align="center"></td>
+                            <td>
+                                <span id="for_sub{{ i }}">选项<input class="counts" type="text" id="choice" name="choice{{ i }}" >
+                                    答案
+                                    <select id="ans{{ i }}" name="ans{{ i }}" >
+                                      <option value ="A" selected="selected">A</option>
+                                      <option value ="B">B</option>
+                                        <option value ="C">C</option>
+                                        <option value ="D">D
+                                        </option>
+                                    </select>
+                                </span>
+
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                        <tr>
+                            <td  width ="100px" align="center"></td>
+                            <td class="secondary" width ="400px" align="center" ><button class="upload" type="submit" >添加</button></td>
+                        </tr>
+
+                        </tbody>
+                        </form>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+        <!-- /Right-bar -->
+        <script>
+
+            function myfunction(i) {
+                i = i.toString();
+                var id = "flag"+i;
+                var myselect=document.getElementById(id);
+                var index=myselect.selectedIndex ;
+                var v = myselect.options[index].value;
+                if(v =='1'){
+                    document.getElementById("for_sub"+i).style.display="none";
+                }
+                if(v == '0'){
+                    document.getElementById("for_sub"+i).style.display="block";
+                }
+            }
+        </script>
+        {% endblock %}
+
+
+
+
+    </body>
+
+</html>

@@ -1,0 +1,81 @@
+{% extends "adminBase.html" %}
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+    <head>
+        {% block head %}
+        <title>学生管理 - 查看作业</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="https://i.loli.net/2019/03/03/5c7bddd728765.png">
+        <!-- App css -->
+         <link href="{{ url_for('static', filename='assets/css/app.css') }}" rel="stylesheet" type="text/css" />
+        {% endblock %}
+    </head>
+
+    <body>
+        {% block navbar %}
+        {{ super() }}
+        {% endblock %}
+        {% block content %}
+        <div class="wrapper">
+            <div class="container-fluid">
+
+                <!-- Page title box -->
+                <div class="page-title-box">
+                    <h4 class="page-title">批改页</h4>
+                </div>
+                <!-- End page title box -->
+                 <div class="card ">
+                    <div class="table">
+                        <table cellspacing="0" cellpadding="0">                    
+                        <tbody>
+                            {% for p_problem in problem_info %}
+                            <tr>
+
+                                <td width="20%" style="border-color:#8E8E8E;border-right-style:dashed;border-width:0.5px"><h5>问题：</h5>
+                                    <text >{{ p_problem.pro_stem }}</text>
+                                    {% if p_problem.flag == 0 %}
+                                    <text>{{ p_problem.choice }}</text>
+                                    {% endif %}
+                                </td>
+                                {% if p_problem.flag == 0 %}
+                                <td width="60%" style="border-color:#8E8E8E;border-right-style:dashed;border-width:0.5px"><h5>学生答案：</h5>
+                                        <p>{{ p_problem.answer }}</p>
+                                        </td>
+                                        <td style="border-color:#8E8E8E;border-right-style:dashed;border-width:0.5px"><h5>正确答案：</h5>
+                                            <p>{{ p_problem.answer}}</p>
+                                        </td>
+                                    {% endif %}
+
+                                </tr>
+                               {% endfor %}
+                                <tr>
+                                    {% if homework_info.done == 1 or homework_info.done == 2%}
+                                      <h5>学生答案：</h5>
+                                    <img src={{ homework_info.store_url }} alt="">
+                                    {% endif %}
+                                </tr>
+                                <tr>
+                                    {% if homework_info.done == 1 %}
+                                            <h5>暂未批改</h5>
+                                    {% elif homework_info.done == 2%}
+                                        <h5>评语：</h5>
+                                        <p>{{ homework_info.comment }}</p>
+                                        {% else %}
+                                        <h5>暂未提交</h5>
+                                        {% endif %}
+                                </tr>
+                        </tbody>
+                        </table>
+                    </div>
+
+
+                    
+                </div>
+                  </div>  
+            </div>
+        <!-- /Right-bar -->
+        {% endblock %}
+    </body>
+</html>

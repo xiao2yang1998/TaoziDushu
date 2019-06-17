@@ -1,0 +1,96 @@
+<!doctype html>
+
+<head>
+
+    {% block head %}
+
+     <link href="{{ url_for('static', filename='assets/css/app.css') }}" rel="stylesheet" type="text/css" />
+    <title>{% block title %}{% endblock %}</title>
+
+    {% endblock %}
+
+</head>
+
+<body>
+
+    <div class="page">
+    {% block navbar %}
+                    <!-- Navigation Bar-->
+        <header id="topnav">
+            <nav class="navbar-custom">
+
+                <div class="container-fluid">
+                    <ul class="list-unstyled topbar-right-menu float-right mb-0">
+
+                        <li class="dropdown notification-list">
+                            <p>您好！{{ session.username }}</p>
+                        </li>
+                        <li class="dropdown notification-list" >
+                            <p ><a  onclick="logout()" href={{ url_for('user_page.logout') }}  >註銷</a></p>
+                        </li>
+
+                    </ul>
+
+                    <ul class="list-inline menu-left mb-0">
+
+                        <li class="float-left">
+                            <a href="index.html" class="logo">
+                                <span class="logo-lg">
+                                    <img src="{{ url_for('static', filename='logoo.jpg') }}" height="50">
+                                </span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+
+            </nav>
+            <!-- end topbar-main -->
+
+            <div class="topbar-menu">
+                <div class="container-fluid">
+                    <div id="navigation">
+                        <!-- Navigation Menu-->
+                        <ul class="navigation-menu">
+
+                            <li >
+                                <a href={{ url_for('admin_page.ShowAllTeachers')}}>管理教師</a>
+                            </li>
+
+                            <li class="has-submenu">
+                                <a href={{ url_for('admin_page.ShowAllStudents')}}>管理學生</a>
+                            </li>
+
+                            <li >
+                                <a href={{ url_for('admin_page.show_classes') }} >管理班級</a>
+                            </li>
+
+                            <li >
+                                <a href={{ url_for('admin_page.show_courses') }} >管理課程</a>
+                            </li>
+                            <li >
+                                <a href={{ url_for('admin_page.show_pcourses') }} >管理单课</a>
+                            </li>
+
+                        </ul>
+                        <!-- End navigation menu -->
+
+                    </div> <!-- end #navigation -->
+                </div> <!-- end container -->
+            </div> <!-- end navbar-custom -->
+        </header>
+        <!-- End Navigation Bar-->
+
+    {% endblock %}
+        {% block content %}
+        {% endblock %}
+
+    </div>
+  <script type="text/javascript">
+	function logout(){
+	  var msg = "註銷成功！";
+	  alert(msg);
+	  return flase;//在ie6下，如果不写return false可能有问题。
+	}
+</script>
+</body>

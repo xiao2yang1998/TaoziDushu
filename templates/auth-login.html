@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+    <head>
+        <meta charset="utf-8" />
+        <title>教师管理 - 登陆</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="https://i.loli.net/2019/03/03/5c7bddd728765.png">
+        <link href="{{ url_for('static', filename='assets/css/app.css') }}" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body class="bg-account-pages">
+    {% block body %}{% endblock %}
+    {% with messages = get_flashed_messages(with_categories=true,category_filter=["message","error"]) %}
+      {% if messages %}
+          <center>
+              {% for category,message in messages %}
+                <ul class="flash" style="list-style:none" >
+                  <li style="color:navajowhite;font-size: 20px">{{ category }}:{{ message }}</li>
+                </ul>
+              {% endfor %}
+          </center>
+
+      {% endif %}
+    {% endwith %}
+        <!-- Login -->
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+
+                        <div class="wrapper-page">
+                            <div class="account-pages">
+                                <div class="account-box">
+
+                                    <!-- Logo box-->
+                                    <div class="account-logo-box">
+                                        <h2 class="text-uppercase text-center">
+                                            <a href="index.html" class="text-success">
+                                                <!-- orange logo unaccess 
+                                                <span><img src="assets/images/logo_dark.png" alt="" height="28"></span>
+                                            -->
+                                            </a>
+                                        </h2>
+                                    </div>
+
+                                    <div class="account-content">
+                                        <form action="/login" method="post">
+                                            <div class="form-group mb-3">
+                                                <input class="form-control" type="email" id="emailaddress" name='username' required="" placeholder="邮箱">
+                                            </div>
+
+                                            <div class="form-group mb-3">
+                                                <a href="auth-recoverpassword.html" class="text-muted float-right"><small>忘记密码?</small></a>
+                                                <input class="form-control" type="password" required="" id="password" name="password" placeholder="密码">
+                                            </div>
+
+                                            <div class="form-group mb-3">
+                                                <div class="checkbox checkbox-info">
+                                                    <input id="remember" type="checkbox">
+                                                    <label for="remember">
+                                                        记住我
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row text-center">
+                                                <div class="col-12">
+                                                    <button class="btn btn-block btn-success waves-effect waves-light" type="submit">登陆</button>
+                                                </div>
+                                            </div>
+                                        </form> <!-- end form -->
+
+                                        <div class="row mt-3">
+                                            <div class="col-12 text-center">
+                                                <p class="text-muted">管理員登錄 <a class="text-dark m-l-5" href={{ url_for('user_page.admin_login')}} ><b>登錄</b></a></p>
+                                            </div>
+                                        </div> <!-- end row-->
+                                    </div> <!-- end account-content -->
+
+                                </div> <!-- end account-box -->
+                            </div>
+                            <!-- end account-page-->
+                        </div>
+                        <!-- end wrapper-page -->
+
+                    </div> <!-- end col -->
+                </div> <!-- end row -->
+            </div> <!-- end container -->
+        </section>
+        <!-- END HOME -->    
+
+        <!-- App js -->
+        <script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js')}}"></script>
+
+    </body>
+
+
+
+</html>

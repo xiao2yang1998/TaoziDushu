@@ -1,0 +1,62 @@
+{% extends "adminBase.html" %}
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+    <head>
+        {% block head %}
+        <meta charset="utf-8" />
+        <title>学生管理</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="https://i.loli.net/2019/03/03/5c7bddd728765.png">
+        <!-- App css -->
+        <link href="{{ url_for('static', filename='assets/css/app.css') }}" rel="stylesheet" type="text/css" />
+        {% endblock %}
+    </head>
+
+    <body>
+        {% block navbar %}
+        {{ super() }}
+        {% endblock %}
+        {% block content %}
+        <div class="wrapper">
+            <div class="container-fluid">
+
+                <!-- Page title box -->
+                <div class="page-title-box">
+                    <h4 class="page-title">学生列表</h4>
+                </div>
+                <!-- End page title box -->
+                <div class="card">
+                    <div class="table">
+                        <table cellspacing="0" cellpadding="0">                    
+                        <tbody>
+                        <tr>
+                            <td  width ="100px" align="center"></td>
+                            <td class="secondary" width ="400px" align="center" >学生ID</td>
+                            <td class="secondary" width ="400px" align="center">当前学分</td>
+                            <td class="secondary" width ="400px" align="center" >问卷结果</td>
+                            <td width ="450px"align="center">推荐课程</td>
+                        </tr>
+                       {% for student in students %}
+                        <tr>
+                            <td  width ="100px" align="center"><a class="check" href={{ url_for('student_page.admin_show_student_info',stu_id=student[0] )}}>查看</a></td>
+                            <td class="secondary" width ="400px" align="center" >{{ student[0] }}</td>
+                            <td class="secondary" width ="400px" align="center">{{ student[1] }}</td>
+                            <td class="secondary" width ="400px" align="center" >{{ student[2] }}</td>
+                            <td width ="450px"align="center">{{ student[3] }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                        </table>
+                    </div>
+                    
+                </div>
+                
+                </div>
+            </div>
+        <!-- /Right-bar -->
+        {% endblock %}
+
+    </body>
+</html>

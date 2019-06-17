@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+    <head>
+        {% block head %}
+        <meta charset="utf-8" />
+        <title>充值</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="https://i.loli.net/2019/03/03/5c7bddd728765.png">
+        <!-- App css -->
+        <link href="{{ url_for('static', filename='assets/css/app.css') }}" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+        {% endblock %}
+    </head>
+
+    <body>
+
+        <div class="wrapper">
+            <div class="container-fluid">
+                </div>
+                 <div class="page-title-box">
+                    <h4 class="page-title">您的余额</h4>
+                     <p>{{ stu_balance }}</p>
+                     <h4 class="page-title">充值金额</h4>
+                     <form  method="post"  accept-charset="utf-8" action={{ url_for('student_page.recharge')}} >
+
+                     <select id="money" name="money" >
+                          <option value ="10" selected="selected">10</option>
+                          <option value ="5">5</option>
+                            <option value ="20">20</option>
+                            <option value ="50">50 </option>
+                    </select>
+                         <button type="submit">充值</button>
+                     </form>
+                </div>
+
+        <!-- /Right-bar -->
+
+    </body>
+</html>

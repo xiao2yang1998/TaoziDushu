@@ -1,0 +1,63 @@
+{% extends "adminBase.html" %}
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+    <head>
+        {% block head %}
+        <meta charset="utf-8" />
+        <title>课程</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="https://i.loli.net/2019/03/03/5c7bddd728765.png">
+        <!-- App css -->
+        <link href="{{ url_for('static', filename='assets/css/app.css') }}" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+        {% endblock %}
+    </head>
+
+    <body>
+        {% block navbar %}
+        {{ super() }}
+        {% endblock %}
+        {% block content %}
+        <div class="wrapper">
+            <div class="container-fluid">
+                </div>
+                 <div class="page-title-box">
+                    <h4 class="page-title">套课列表</h4>
+                     <a class="glyphicon glyphicon-plus" href="{{ url_for('admin_page.to_add_course')}}">添加套课</a>
+                </div>
+                <div class="card">
+                <table>
+                    <tr>
+                            <td  width ="150px" align="center"></td>
+                            <td class="secondary" align="center" style="padding:10px">课程名</td>
+                            <td class="secondary" align="center" style="padding:10px">课程主题</td>
+                            <td class="secondary" align="center" style="padding:10px">课程阶段</td>
+                            <td class="secondary" align="center" style="padding:10px">课程简介</td>
+                            <td class="secondary" align="center" style="padding:10px">课程学分</td>
+                            <td class="secondary" align="center" style="padding:10px">课程价格</td>
+
+                    </tr>
+                    {% for scourse in setcourses  %}
+
+                    <tr>
+                            <td  width ="150px" align="center"><a class="upload" href="{{ url_for('admin_page.to_mod_course',scourse_id=scourse.scourse_id)}}" >查看详情</a></td>
+                            <td class="secondary" align="center" style="padding:10px">{{ scourse.scourse_title }}</td>
+                            <td class="secondary" align="center" style="padding:10px">{{ scourse.scourse_theme }}</td>
+                            <td class="secondary" align="center" style="padding:10px">{{ scourse.scourse_stage }}</td>
+                            <td class="secondary" align="center" style="padding:10px">{{ scourse.scourse_intro }}</td>
+                            <td class="secondary" align="center" style="padding:10px">{{ scourse.scourse_credit }}</td>
+                            <td class="secondary" align="center" style="padding:10px">{{ scourse.scourse_price }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+
+                </div>
+
+            </div>
+        <!-- /Right-bar -->
+        {% endblock %}
+
+    </body>
+</html>

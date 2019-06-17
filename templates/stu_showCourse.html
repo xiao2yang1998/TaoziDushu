@@ -1,0 +1,76 @@
+{% extends "studentBase.html" %}
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+    <head>
+        {% block head %}
+        <meta charset="utf-8" />
+        <title>创意课程</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="https://i.loli.net/2019/03/03/5c7bddd728765.png">
+        <!-- App css -->
+        <link href="{{ url_for('static', filename='assets/css/app.css') }}" rel="stylesheet" type="text/css" />
+            <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+
+        {% endblock %}
+    </head>
+
+    <body>
+        {% block navbar %}
+        {{ super() }}
+        {% endblock %}
+        {% block content %}
+        <div class="wrapper">
+            <div class="container-fluid">
+
+                <!-- Page title box -->
+                <div class="page-title-box">
+                    <h4 class="page-title">创意课程列表</h4>
+                </div>
+                <!-- End page title box -->
+                <div class="card">
+                    <div class="table">
+                        <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                        <tr>
+                            <td  width ="100px" align="center"></td>
+                            <td class="secondary"  align="center" >班级ID</td>
+                            <td class="secondary" align="center">教师名称</td>
+                            <td class="secondary" align="center" >课程名称</td>
+                            <td class="secondary"  align="center" >开始时间</td>
+                            <td class="secondary" align="center" >结束时间</td>
+                            <td class="secondary"  align="center">课程主题</td>
+                            <td class="secondary" width="300px" align="center">课程介绍</td>
+                            <td class="secondary"  align="center">课程学分</td>
+                            <td class="secondary"  align="center">课程价格</td>
+                        </tr>
+                       {% for class in classes %}
+                        <tr>
+                        {% if class[0] not in joined_class %}
+                            <td  width ="100px" align="center"><a class="check" href={{ url_for('student_page.join_calss',class_id=class[0] )}}>加入班级</a></td>
+                            <td class="secondary" align="center" >{{ class[0] }}</td>
+                            <td class="secondary" align="center">{{ class[1] }}</td>
+                            <td class="secondary" align="center" >{{ class[2] }}</td>
+                            <td class="secondary" align="center" >{{ class[3] }}</td>
+                            <td class="secondary" align="center" >{{ class[4] }}</td>
+                            <td class="secondary" align="center" >{{ class[5] }}</td>
+                            <td class="secondary" align="center" >{{ class[6] }}</td>
+                            <td class="secondary" align="center" >{{ class[7] }}</td>
+                            <td class="secondary" align="center" >{{ class[8] }}</td>
+                        </tr>
+                           {% endif %}
+                        {% endfor %}
+                        </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+                </div>
+            </div>
+        <!-- /Right-bar -->
+        {% endblock %}
+
+    </body>
+</html>

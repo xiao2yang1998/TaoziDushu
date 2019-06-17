@@ -1,0 +1,67 @@
+{% extends "adminBase.html" %}
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+    <head>
+        {% block head %}
+        <meta charset="utf-8" />
+        <title>教师管理</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="https://i.loli.net/2019/03/03/5c7bddd728765.png">
+        <!-- App css -->
+        <link href="{{ url_for('static', filename='assets/css/app.css') }}" rel="stylesheet" type="text/css" />
+        {% endblock %}
+    </head>
+
+    <body>
+        {% block navbar %}
+        {{ super() }}
+        {% endblock %}
+        {% block content %}
+        <div class="wrapper">
+            <div class="container-fluid">
+
+                <!-- Page title box -->
+                <div class="page-title-box">
+                    <h4 class="page-title">教師列表</h4>
+                </div>
+                <!-- End page title box -->
+                <div class="card">
+                    <div class="table">
+                        <table cellspacing="0" cellpadding="0">                    
+                        <tbody>
+                        <tr>
+                            <td  width ="150px" align="center"></td>
+                            <td class="secondary" width ="300px" align="center" >姓名</td>
+                            <td class="secondary" width ="300px" align="center">教師郵箱</td>
+                            <td class="secondary" width ="300px" align="center" >教師密碼</td>
+                            <td width ="600px"align="center">教師介紹</td>
+                        </tr>
+                       {% for teacher in teachers %}
+                        <tr>
+                            <td  width ="150px" align="center"><a class="upload" href={{ url_for('admin_page.toModTeacher',tea_id = teacher[0])}}>編輯</a><a class="wait" href={{ url_for('admin_page.toDelTeacher',tea_id = teacher[0])}}>删除</a></td>
+                            <td class="secondary" width ="300px" align="center" >{{ teacher[2] }}</td>
+                            <td class="secondary" width ="300px" align="center">{{ teacher[1] }}</td>
+                            <td class="secondary" width ="300px" align="center" >{{ teacher[3] }}</td>
+                            <td width ="600px"align="center">{{ teacher[4] }}</td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <td  width ="100px" align="center"></td>
+                            <td class="secondary" width ="400px" align="center" ><a class="check" href="
+">添加教師</a></td>
+                        </tr>
+                        </tbody>
+                        </table>
+                    </div>
+                    
+                </div>
+                
+                </div>
+            </div>
+        <!-- /Right-bar -->
+        {% endblock %}
+
+    </body>
+</html>

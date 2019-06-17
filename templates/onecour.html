@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+    <head>
+        {% block head %}
+        <meta charset="utf-8" />
+        <title>教师管理 - 课程详情</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="https://i.loli.net/2019/03/03/5c7bddd728765.png">
+        <!-- App css -->
+         <link href="{{ url_for('static', filename='assets/css/app.css') }}" rel="stylesheet" type="text/css" />
+        {% endblock %}
+    </head>
+
+    <body>
+        {% block navbar %}
+        {{ super() }}
+        {% endblock %}
+        {% block content %}
+        <div class="wrapper">
+            <div class="container-fluid">
+
+                <!-- Page title box -->
+                <div class="page-title-box">
+                    <h4 class="page-title">{{ scourse_info.scourse_id}}{{"/"}}{{scourse_info.scourse_title }}</h4>
+                </div>
+                <!-- End page title box -->
+                 <div class="card">
+                    <div class="table">
+                        <table cellspacing="0" cellpadding="0">                    
+                        <tbody>
+                        <tr>
+                            <td  width ="100px" align="center"></td>
+                            {% for i in range(1,pcourse_num+1) %}
+                            <td class="secondary" align="center">{{ '作业 '}}{{i}}</td>
+                            {% endfor %}
+                        </tr>
+
+                        {% for stu_id in stu_homework %}
+                        <tr>
+                            <td  width ="100px" align="center"><a href={{ url_for('student_page.ShowStudentInfo',stu_id=stu_id )}}>{{ stu_id }}</a></td>
+                            {% for p_homework in stu_homework[stu_id] %}
+                                {% if p_homework[1]==1 %}
+                                <td class="secondary" align="center"><a class="check" href={{ url_for('homework_page.ShowHomework',homework_id =p_homework[0]) }}>已提交，未批改</a></td>
+                                {% elif p_homework[1]==0 %}
+                                <td class="secondary" align="center"><a class="wait" href={{ url_for('homework_page.ShowHomework',homework_id =p_homework[0]) }}>未提交</a></td>
+                                    {% else %}
+                                    <td class="secondary" align="center"><a class="upload" href={{ url_for('homework_page.ShowHomework',homework_id =p_homework[0]) }}>已提交，已修改</a></td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+
+                        </tbody>
+                        </table>
+                    </div>
+                
+                </div>
+            </div>
+        <!-- /Right-bar -->
+        {% endblock %}
+    </body>
+</html>

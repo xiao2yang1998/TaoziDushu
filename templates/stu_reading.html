@@ -1,0 +1,59 @@
+{% extends "studentBase.html" %}
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+    <head>
+        {% block head %}
+        <meta charset="utf-8" />
+        <title>书籍列表</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="https://i.loli.net/2019/03/03/5c7bddd728765.png">
+        <!-- App css -->
+        <link href="{{ url_for('static', filename='assets/css/app.css') }}" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+        {% endblock %}
+    </head>
+
+    <body>
+        {% block navbar %}
+        {{ super() }}
+        {% endblock %}
+        {% block content %}
+        <div class="wrapper">
+            <div class="container-fluid">
+
+                <!-- Page title box -->
+                <div class="page-title-box">
+                    <h4 class="page-title">书籍列表</h4>
+                </div>
+                <!-- End page title box -->
+                <div class="card">
+                <table>
+                    <tr>
+                            <td  width ="150px" align="center"></td>
+                            <td>课程封面</td>
+                            <td class="secondary" width ="300px" align="center" style="padding:10px">课程名</td>
+                            <td class="secondary" width ="600px" align="center" style="padding:10px">课程简介</td>
+                    </tr>
+                    {% for pcourse in percourses %}
+
+                    <tr>
+                            {% if pcourse.pcourse_id in read %}
+                                <td  width ="150px" align="center"><a class="wait" href="{{ url_for("student_page.to_read",pcourse_id=pcourse.pcourse_id) }}" >已读</a></td>
+                            {% else %}
+                                    <td  width ="150px" align="center"><a class="upload" href="{{ url_for("student_page.to_buy_pcourse",pcourse_id=pcourse.pcourse_id) }}" >购买</a></td>
+                            {% endif %}
+                            <td  width ="150px"><img src="{{ url_for('static', filename = 'img/%s'%pcourse.pcourse_imgurl ) }}" height="50" ></td>
+                            <td class="secondary" width ="300px" align="center" style="padding:10px">{{ pcourse.pcourse_title  }}</td>
+                            <td class="secondary" width ="600px" align="center" style="padding:10px">{{ pcourse.pcourse_intro[:100] }}...</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <center>{{ pagination.links }}</center>
+
+        <!-- /Right-bar -->
+        {% endblock %}
+
+    </body>
+</html>

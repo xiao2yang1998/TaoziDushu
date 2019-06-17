@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+    <head>
+        {% block head %}
+        <meta charset="utf-8" />
+        <title>教师管理 - 我的学生</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="https://i.loli.net/2019/03/03/5c7bddd728765.png">
+        <!-- App css -->
+        <link href="{{ url_for('static', filename='assets/css/app.css') }}" rel="stylesheet" type="text/css" />
+        {% endblock %}
+    </head>
+
+    <body>
+        {% block navbar %}
+        {{ super() }}
+        {% endblock %}
+        {% block content %}
+        <div class="wrapper">
+            <div class="container-fluid">
+
+                <!-- Page title box -->
+                <div class="page-title-box">
+                    <h4 class="page-title">学生列表</h4>
+                </div>
+                <!-- End page title box -->
+                 <div class="card">
+                    <div class="table">
+                        <table cellspacing="0" cellpadding="0">                    
+                        <tbody>
+                        {% for p_student_class in student_class  %}
+                        <tr>
+                            <td  width ="100px" align="center"><a class="check" href={{ url_for('student_page.ShowStudentInfo',stu_id=p_student_class[0] )}}>查看</a></td>
+                            <td class="secondary" width ="450px" align="center" >{{ p_student_class[0] }}</td>
+                            <td class="secondary" width ="450px" align="center"><a href={{ url_for('course_page.ShowClassInfo',class_id=p_student_class[1])}}>{{ "班级号："}}{{ p_student_class[1] }} </a></td>
+                            <td width ="400px" align="center" >备注</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                        </table>
+                    </div>
+                
+                </div>
+            </div>
+        {% endblock %}
+
+    </body>
+</html>

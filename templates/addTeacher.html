@@ -1,0 +1,76 @@
+{% extends "adminBase.html" %}
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+    <head>
+        {% block head %}
+        <meta charset="utf-8" />
+        <title>教師管理-添加教師</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="https://i.loli.net/2019/03/03/5c7bddd728765.png">
+        <!-- App css -->
+        <link href="{{ url_for('static', filename='assets/css/app.css') }}" rel="stylesheet" type="text/css" />
+        {% endblock %}
+    </head>
+
+    <body>
+        {% block navbar %}
+        {{ super() }}
+        {% endblock %}
+        {% block content %}
+        <div class="wrapper">
+            <div class="container-fluid">
+
+                <!-- Page title box -->
+                <div class="page-title-box">
+                    <h4 class="page-title">添加教師</h4>
+                </div>
+                <!-- End page title box -->
+                <div class="card">
+                    <form  method="post" accept-charset="utf-8" action={{ url_for('admin_page.addTeacher')}}>
+
+                        <div class="table">
+                        <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                        <tr>
+                            <td  width ="100px" align="center">教師姓名</td>
+                            <td><input class="counts" type="text" id="tea_name" name="tea_name" ></td>
+
+                        </tr>
+                        <tr>
+                            <td  width ="100px" align="center">邮箱</td>
+                            <td><input class="counts" type="text" id="tea_email" name="tea_email" ></td>
+
+                        </tr>
+                        <tr>
+                            <td  width ="100px" align="center">密码</td>
+                            <td><input class="counts" type="text" id="password" name="password" ></td>
+
+                        </tr>
+                        <tr>
+                            <td  width ="100px" align="center">介绍</td>
+                            <td><input class="counts" type="text" id="count" name="teacher_intro" ></td>
+
+                        </tr>
+                        <tr>
+                            <td  width ="100px" align="center"></td>
+                            <td class="secondary" width ="400px" align="center" ><button class="check" type="submit" >添加教师</button></td>
+                        </tr>
+                        </tbody>
+                        </form>
+                        </table>
+                    </div>
+
+
+
+                    
+                </div>
+                
+                </div>
+            </div>
+        <!-- /Right-bar -->
+        {% endblock %}
+
+    </body>
+</html>

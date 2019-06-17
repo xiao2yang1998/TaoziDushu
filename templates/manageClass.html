@@ -1,0 +1,67 @@
+{% extends "adminBase.html" %}
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+    <head>
+        {% block head %}
+        <meta charset="utf-8" />
+        <title>班级管理</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="https://i.loli.net/2019/03/03/5c7bddd728765.png">
+        <!-- App css -->
+        <link href="{{ url_for('static', filename='assets/css/app.css') }}" rel="stylesheet" type="text/css" />
+            <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+
+        {% endblock %}
+    </head>
+
+    <body>
+        {% block navbar %}
+        {{ super() }}
+        {% endblock %}
+        {% block content %}
+        <div class="wrapper">
+            <div class="container-fluid">
+
+                <!-- Page title box -->
+                <div class="page-title-box">
+                    <h4 class="page-title">班级列表</h4>
+                    <a class="glyphicon glyphicon-plus" href="{{ url_for('admin_page.to_add_class')}}">添加班级</a>
+                </div>
+                <!-- End page title box -->
+                <div class="card">
+                    <div class="table">
+                        <table cellspacing="0" cellpadding="0">                    
+                        <tbody>
+                        <tr>
+                            <td  width ="100px" align="center"></td>
+                            <td class="secondary" width ="100px" align="center" >班级ID</td>
+                            <td class="secondary" width ="200px" align="center">教师名称</td>
+                            <td class="secondary" width ="400px" align="center" >课程名称</td>
+                            <td class="secondary" width ="400px" align="center" >开始时间</td>
+                            <td class="secondary" width ="400px" align="center" >结束时间</td>
+                        </tr>
+                       {% for class in classes %}
+                        <tr>
+                            <td  width ="100px" align="center"><a class="check" href={{ url_for('admin_page.del_calss',class_id=class[0] )}}>删除</a></td>
+                            <td class="secondary" width ="100px" align="center" >{{ class[0] }}</td>
+                            <td class="secondary" width ="200px" align="center">{{ class[1] }}</td>
+                            <td class="secondary" width ="400px" align="center" >{{ class[2] }}</td>
+                            <td class="secondary" width ="400px" align="center" >{{ class[3] }}</td>
+                            <td class="secondary" width ="400px" align="center" >{{ class[4] }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                        </table>
+                    </div>
+                    
+                </div>
+                
+                </div>
+            </div>
+        <!-- /Right-bar -->
+        {% endblock %}
+
+    </body>
+</html>
